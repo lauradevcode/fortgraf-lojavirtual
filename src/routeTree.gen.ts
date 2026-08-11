@@ -10,33 +10,79 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CarrinhoRouteImport } from './routes/carrinho'
+import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as ProdutosIndexRouteImport } from './routes/produtos.index'
+import { Route as ProdutosIdRouteImport } from './routes/produtos.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CarrinhoRoute = CarrinhoRouteImport.update({
+  id: '/carrinho',
+  path: '/carrinho',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProdutosIndexRoute = ProdutosIndexRouteImport.update({
+  id: '/produtos/',
+  path: '/produtos/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProdutosIdRoute = ProdutosIdRouteImport.update({
+  id: '/produtos/$id',
+  path: '/produtos/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/carrinho': typeof CarrinhoRoute
+  '/checkout': typeof CheckoutRoute
+  '/produtos/$id': typeof ProdutosIdRoute
+  '/produtos/': typeof ProdutosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/carrinho': typeof CarrinhoRoute
+  '/checkout': typeof CheckoutRoute
+  '/produtos/$id': typeof ProdutosIdRoute
+  '/produtos': typeof ProdutosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/carrinho': typeof CarrinhoRoute
+  '/checkout': typeof CheckoutRoute
+  '/produtos/$id': typeof ProdutosIdRoute
+  '/produtos/': typeof ProdutosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/carrinho' | '/checkout' | '/produtos/$id' | '/produtos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/carrinho' | '/checkout' | '/produtos/$id' | '/produtos'
+  id:
+    | '__root__'
+    | '/'
+    | '/carrinho'
+    | '/checkout'
+    | '/produtos/$id'
+    | '/produtos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CarrinhoRoute: typeof CarrinhoRoute
+  CheckoutRoute: typeof CheckoutRoute
+  ProdutosIdRoute: typeof ProdutosIdRoute
+  ProdutosIndexRoute: typeof ProdutosIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +94,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/carrinho': {
+      id: '/carrinho'
+      path: '/carrinho'
+      fullPath: '/carrinho'
+      preLoaderRoute: typeof CarrinhoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/produtos/': {
+      id: '/produtos/'
+      path: '/produtos'
+      fullPath: '/produtos/'
+      preLoaderRoute: typeof ProdutosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/produtos/$id': {
+      id: '/produtos/$id'
+      path: '/produtos/$id'
+      fullPath: '/produtos/$id'
+      preLoaderRoute: typeof ProdutosIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CarrinhoRoute: CarrinhoRoute,
+  CheckoutRoute: CheckoutRoute,
+  ProdutosIdRoute: ProdutosIdRoute,
+  ProdutosIndexRoute: ProdutosIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
