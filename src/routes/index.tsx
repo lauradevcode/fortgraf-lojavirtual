@@ -35,7 +35,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Grandes e pequenos formatos com produção em até 2 dias úteis. Peça online cartões, banners, adesivos e mais.",
+          "Gráfica em São Luís do Maranhão: impressão offset e digital, comunicação visual, fachadas e adesivação. Produção em até 2 dias úteis. (98) 3222-7139.",
       },
     ],
   }),
