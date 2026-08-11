@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { useCart } from "@/lib/cart";
-import { brl, getProduct } from "@/lib/products";
+import { brl, getProduct, type Product } from "@/lib/products";
 
 export const Route = createFileRoute("/produtos/$id")({
   loader: ({ params }) => {
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/produtos/$id")({
 });
 
 function ProdutoPage() {
-  const { product } = Route.useLoaderData();
+  const { product } = Route.useLoaderData() as { product: Product };
   const { addItem } = useCart();
   const navigate = useNavigate();
   const [variantId, setVariantId] = useState(product.variants[0]!.id);
