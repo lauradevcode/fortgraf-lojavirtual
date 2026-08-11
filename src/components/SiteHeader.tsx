@@ -6,11 +6,12 @@ import { Logo } from "@/components/Logo";
 import { useCart } from "@/lib/cart";
 
 const nav = [
-  { label: "Página Inicial", to: "/", hash: undefined },
-  { label: "Serviços", to: "/", hash: "servicos" },
-  { label: "Produtos", to: "/produtos", hash: undefined },
-  { label: "Parceiros", to: "/", hash: "parceiros" },
+  { label: "Página Inicial", to: "/" as const },
+  { label: "Serviços", to: "/" as const, hash: "servicos" },
+  { label: "Produtos", to: "/produtos" as const },
+  { label: "Parceiros", to: "/" as const, hash: "parceiros" },
 ];
+
 
 export function SiteHeader() {
   const { count } = useCart();
