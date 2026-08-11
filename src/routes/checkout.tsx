@@ -209,8 +209,8 @@ function Field({
   label: string;
   name: string;
   type?: string;
-  placeholder?: string;
-  error?: string;
+  placeholder?: string | undefined;
+  error?: string | undefined;
   required?: boolean;
 }) {
   return (
