@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
+  useRouterState,
   Link,
   createRootRouteWithContext,
   useRouter,
@@ -13,6 +14,8 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CartProvider } from "../lib/cart";
 import { Toaster } from "../components/ui/sonner";
+import { WhatsAppAssistant } from "../components/WhatsAppAssistant";
+import { AnimatePresence, motion } from "motion/react";
 
 function NotFoundComponent() {
   return (
@@ -128,10 +131,29 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <CartProvider>
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <Outlet />
+        <PageTransition />
+        <WhatsAppAssistant />
         <Toaster position="top-right" />
       </CartProvider>
     </QueryClientProvider>
 
+  );
+}
+
+function PageTransition() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  return (
+    <AnimatePresence mode="wait" initial={false}>
+      <motion.div
+        key={pathname}
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -8 }}
+        transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <Outlet />
+      </motion.div>
+    </AnimatePresence>
   );
 }
