@@ -114,7 +114,11 @@ function Hero() {
       <div className="grid-texture absolute inset-0 opacity-40" />
 
       <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:py-28">
-        <div>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
           <p className="inline-flex items-center gap-2 border-l-4 border-cmyk-y pl-3 text-xs font-bold uppercase tracking-[0.24em] text-white/85">
             Gráfica e Editora · São Luís — MA
           </p>
@@ -155,13 +159,18 @@ function Hero() {
               Fazer orçamento
             </a>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="hidden items-center justify-end lg:flex">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.94 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="hidden items-center justify-end lg:flex"
+        >
           <div className="bg-white/95 px-10 py-8 shadow-2xl">
             <Logo size="lg" />
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -179,7 +188,7 @@ function CitySection() {
         className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-black/70" />
-      <div className="relative mx-auto max-w-3xl px-4 py-24 text-center sm:px-6">
+      <Reveal className="relative mx-auto max-w-3xl px-4 py-24 text-center sm:px-6">
         <h2 className="text-3xl uppercase text-white sm:text-5xl">Gráfica em São Luís é aqui!</h2>
         <p className="mt-5 text-base leading-relaxed text-white/80">
           Somos reconhecidos na capital maranhense pela experiência de mais de duas décadas e pela
@@ -192,7 +201,7 @@ function CitySection() {
         >
           Fale conosco <ArrowRight className="h-4 w-4" />
         </a>
-      </div>
+      </Reveal>
     </section>
   );
 }
@@ -338,9 +347,9 @@ function StoreSection() {
         </div>
 
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {products.map((p) => (
+          {products.map((p, i) => (
+            <Reveal key={p.id} delay={(i % 4) * 0.07}>
             <Link
-              key={p.id}
               to="/produtos/$id"
               params={{ id: p.id }}
               className="hover-lift press group flex gap-4 border border-border bg-card p-4 hover:border-primary"
@@ -359,6 +368,7 @@ function StoreSection() {
                 <p className="font-display text-lg text-primary">{brl(minPrice(p))}</p>
               </div>
             </Link>
+            </Reveal>
           ))}
         </div>
       </div>
