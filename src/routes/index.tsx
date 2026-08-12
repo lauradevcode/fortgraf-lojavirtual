@@ -8,6 +8,7 @@ import {
   Sparkles,
   Target,
 } from "lucide-react";
+import { motion } from "motion/react";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -21,6 +22,8 @@ import team2 from "@/assets/team-2.jpg";
 import team3 from "@/assets/team-3.jpg";
 import team4 from "@/assets/team-4.jpg";
 import { brl, minPrice, products } from "@/lib/products";
+import { CountUp } from "@/components/CountUp";
+import { Reveal } from "@/components/Reveal";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -141,13 +144,13 @@ function Hero() {
           <div className="mt-9 flex flex-wrap gap-3">
             <Link
               to="/produtos"
-              className="inline-flex items-center gap-2 bg-white px-6 py-4 text-sm font-bold uppercase tracking-wide text-navy transition-colors hover:bg-cmyk-y"
+              className="press inline-flex items-center gap-2 bg-white px-6 py-4 text-sm font-bold uppercase tracking-wide text-navy transition-colors hover:bg-cmyk-y"
             >
               Comprar online <ArrowRight className="h-4 w-4" />
             </Link>
             <a
               href="#orcamento"
-              className="inline-flex items-center gap-2 border border-white/60 px-6 py-4 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-white/10"
+              className="press inline-flex items-center gap-2 border border-white/60 px-6 py-4 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-white/10"
             >
               Fazer orçamento
             </a>
@@ -185,7 +188,7 @@ function CitySection() {
         </p>
         <a
           href="#orcamento"
-          className="mt-9 inline-flex items-center gap-2 bg-primary px-7 py-4 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-colors hover:bg-primary-dark"
+          className="press mt-9 inline-flex items-center gap-2 bg-primary px-7 py-4 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-colors hover:bg-primary-dark"
         >
           Fale conosco <ArrowRight className="h-4 w-4" />
         </a>
@@ -196,9 +199,9 @@ function CitySection() {
 
 function VisualCommunication() {
   const stats = [
-    { value: "+147", label: "Clientes satisfeitos" },
-    { value: "+271", label: "Projetos entregues" },
-    { value: "22", label: "Anos de experiência" },
+    { value: 147, prefix: "+", label: "Clientes satisfeitos" },
+    { value: 271, prefix: "+", label: "Projetos entregues" },
+    { value: 22, prefix: "", label: "Anos de experiência" },
   ];
 
   return (
@@ -221,7 +224,9 @@ function VisualCommunication() {
           <dl className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-3">
             {stats.map((s) => (
               <div key={s.label} className="border-t-4 border-primary pt-3">
-                <dt className="font-display text-3xl text-foreground">{s.value}</dt>
+                <dt className="font-display text-3xl text-foreground">
+                  <CountUp value={s.value} prefix={s.prefix} />
+                </dt>
                 <dd className="mt-1 text-xs font-bold uppercase tracking-wide text-muted-foreground">
                   {s.label}
                 </dd>
@@ -231,7 +236,7 @@ function VisualCommunication() {
 
           <a
             href="#orcamento"
-            className="mt-10 inline-flex items-center gap-2 bg-foreground px-7 py-4 text-sm font-bold uppercase tracking-wide text-background transition-colors hover:bg-primary"
+            className="press mt-10 inline-flex items-center gap-2 bg-foreground px-7 py-4 text-sm font-bold uppercase tracking-wide text-background transition-colors hover:bg-primary"
           >
             Fale conosco <ArrowRight className="h-4 w-4" />
           </a>
@@ -260,17 +265,21 @@ function Pillars() {
     <section className="border-y border-border bg-muted/50 py-20">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-3">
         {pillars.map(({ icon: Icon, title, text }, i) => (
-          <div key={title} className="bg-card p-8 shadow-sm">
-            <span
-              className={`grid h-14 w-14 place-items-center ${
-                i === 0 ? "bg-cmyk-c" : i === 1 ? "bg-cmyk-m" : "bg-cmyk-y"
-              }`}
-            >
-              <Icon className={`h-6 w-6 ${i === 2 ? "text-black" : "text-white"}`} />
-            </span>
-            <h3 className="mt-6 text-xl uppercase">{title}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{text}</p>
-          </div>
+          <Reveal key={title} delay={i * 0.12}>
+            <div className="hover-lift h-full bg-card p-8 text-center shadow-sm">
+              <motion.span
+                whileHover={{ rotate: -6, scale: 1.06 }}
+                transition={{ type: "spring", stiffness: 300, damping: 16 }}
+                className={`mx-auto grid h-16 w-16 place-items-center ${
+                  i === 0 ? "bg-cmyk-c" : i === 1 ? "bg-cmyk-m" : "bg-cmyk-y"
+                }`}
+              >
+                <Icon className={`h-7 w-7 ${i === 2 ? "text-black" : "text-white"}`} />
+              </motion.span>
+              <h3 className="mt-6 text-xl uppercase">{title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{text}</p>
+            </div>
+          </Reveal>
         ))}
       </div>
     </section>
@@ -285,19 +294,21 @@ function HelpSection() {
           Como podemos te ajudar?
         </h2>
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {helpCards.map((c) => (
+          {helpCards.map((c, i) => (
+            <Reveal key={c.title} delay={i * 0.08}>
             <a
-              key={c.title}
               href="#orcamento"
-              className="group bg-white p-6 transition-transform hover:-translate-y-1"
+              className="hover-lift press group block h-full bg-white p-6"
             >
               <span className="block h-1 w-10 bg-cmyk-m transition-all group-hover:w-20" />
               <h3 className="mt-5 text-lg uppercase text-navy">{c.title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{c.text}</p>
               <span className="mt-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary">
-                Saiba mais <ArrowRight className="h-3.5 w-3.5" />
+                Saiba mais
+                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
               </span>
             </a>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -332,7 +343,7 @@ function StoreSection() {
               key={p.id}
               to="/produtos/$id"
               params={{ id: p.id }}
-              className="group flex gap-4 border border-border bg-card p-4 transition-colors hover:border-primary"
+              className="hover-lift press group flex gap-4 border border-border bg-card p-4 hover:border-primary"
             >
               <img
                 src={p.image}
@@ -340,7 +351,7 @@ function StoreSection() {
                 loading="lazy"
                 width={900}
                 height={700}
-                className="h-20 w-20 shrink-0 object-cover"
+                className="h-20 w-20 shrink-0 object-cover transition-transform duration-300 group-hover:scale-105"
               />
               <div className="min-w-0">
                 <h3 className="truncate text-base uppercase group-hover:text-primary">{p.name}</h3>
@@ -370,7 +381,7 @@ function PartnersSection() {
           {partners.map((name) => (
             <div
               key={name}
-              className="grid h-24 place-items-center bg-card px-4 text-center text-sm font-bold uppercase tracking-wide text-muted-foreground transition-colors hover:text-primary"
+              className="grid h-24 place-items-center bg-card px-4 transition-transform hover:scale-[1.03] text-center text-sm font-bold uppercase tracking-wide text-muted-foreground transition-colors hover:text-primary"
             >
               {name}
             </div>
@@ -497,7 +508,7 @@ function QuoteSection() {
 
           <button
             type="submit"
-            className="mt-7 inline-flex w-full items-center justify-center gap-2 bg-primary px-6 py-4 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-colors hover:bg-primary-dark"
+            className="press mt-7 inline-flex w-full items-center justify-center gap-2 bg-primary px-6 py-4 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-colors hover:bg-primary-dark"
           >
             Enviar <ArrowRight className="h-4 w-4" />
           </button>
