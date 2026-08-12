@@ -348,7 +348,7 @@ function StoreSection() {
 
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {products.map((p, i) => (
-            <Reveal key={p.id} delay={(i % 4) * 0.07}>
+            <Reveal key={p.id} delay={(i % 4) * 0.07} className="min-w-0">
             <Link
               to="/produtos/$id"
               params={{ id: p.id }}
