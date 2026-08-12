@@ -40,7 +40,7 @@ export function WhatsAppAssistant() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([
     { from: "bot", text: "Olá! Sou a assistente virtual da FortGraf. 👋" },
-    { from: "bot", text: steps[0].question },
+    { from: "bot", text: steps[0]!.question },
   ]);
   const [stepIndex, setStepIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -63,13 +63,13 @@ export function WhatsAppAssistant() {
   }
 
   function answer(option: string) {
-    const step = steps[stepIndex];
+    const step = steps[stepIndex]!;
     setMessages((m) => [...m, { from: "user", text: option }]);
     setAnswers((a) => ({ ...a, [step.id]: option }));
     const next = stepIndex + 1;
     setStepIndex(next);
     if (next < steps.length) {
-      pushBot(steps[next].question);
+      pushBot(steps[next]!.question);
     } else {
       pushBot(
         "Perfeito! Já tenho o essencial. Vou te levar para o WhatsApp com o resumo pronto para nossa equipe finalizar o atendimento.",
@@ -177,7 +177,7 @@ export function WhatsAppAssistant() {
             <div className="border-t border-border bg-card p-3">
               {!done && !typing && (
                 <div className="flex flex-wrap gap-2">
-                  {steps[stepIndex].options.map((o) => (
+                  {steps[stepIndex]!.options.map((o) => (
                     <button
                       key={o}
                       type="button"
