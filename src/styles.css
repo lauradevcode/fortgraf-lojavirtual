@@ -77,6 +77,12 @@
     border-color: var(--color-border);
   }
 
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -119,4 +125,32 @@
   letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--primary);
+}
+
+/* Micro-interações reutilizáveis. */
+@utility hover-lift {
+  transition:
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s ease,
+    border-color 0.2s ease;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px -22px color-mix(in oklab, var(--navy) 60%, transparent);
+  }
+}
+
+@utility press {
+  transition: transform 0.12s ease;
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
 }
