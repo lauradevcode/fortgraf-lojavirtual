@@ -41,6 +41,13 @@
   --color-cmyk-m: var(--cmyk-m);
   --color-cmyk-y: var(--cmyk-y);
   --color-cmyk-k: var(--cmyk-k);
+  --color-ink-c: var(--ink-c);
+  --color-ink-m: var(--ink-m);
+  --color-ink-y: var(--ink-y);
+  --color-ink-k: var(--ink-k);
+  --color-ink-red: var(--ink-red);
+  --color-paper: var(--paper);
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 }
 
 :root {
@@ -70,6 +77,13 @@
   --cmyk-m: oklch(0.585 0.276 349);
   --cmyk-y: oklch(0.885 0.181 96);
   --cmyk-k: oklch(0.16 0.01 265);
+  /* Tintas de prova de impressão (valores exatos da direção de arte). */
+  --ink-c: #00aeef;
+  --ink-m: #ec008c;
+  --ink-y: #ffd400;
+  --ink-k: #0b0b0c;
+  --ink-red: #e4032e;
+  --paper: #f7f5f0;
 }
 
 @layer base {
@@ -153,4 +167,30 @@
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
   }
+}
+
+@utility ink-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: 4px;
+  & > span:nth-child(1) { background: var(--ink-c); }
+  & > span:nth-child(2) { background: var(--ink-m); }
+  & > span:nth-child(3) { background: var(--ink-y); }
+  & > span:nth-child(4) { background: var(--ink-k); }
+}
+
+/* Leve desalinhamento de registro no hover do card, corrigido suavemente. */
+@utility registration-shift {
+  & .reg-layer {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  &:hover .reg-layer {
+    animation: reg-misalign 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+@keyframes reg-misalign {
+  0% { transform: translate(0, 0); }
+  35% { transform: translate(-1.5px, 1px); }
+  100% { transform: translate(0, 0); }
 }
