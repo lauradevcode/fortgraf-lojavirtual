@@ -169,35 +169,6 @@
   }
 }
 
-/* --- Prova de impressão: marcas de corte e barra CMYK --- */
-@utility crop-marks {
-  position: relative;
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    width: 9px;
-    height: 9px;
-    pointer-events: none;
-    background-image:
-      linear-gradient(var(--ink-k), var(--ink-k)),
-      linear-gradient(var(--ink-k), var(--ink-k));
-    background-size: 100% 1px, 1px 100%;
-    background-position: center center, center center;
-    background-repeat: no-repeat;
-  }
-  &::before {
-    top: 4px;
-    left: 4px;
-    box-shadow:
-      calc(100% + 8px) 0 0 0 transparent;
-  }
-  &::after {
-    top: 4px;
-    right: 4px;
-  }
-}
-
 @utility ink-bar {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
