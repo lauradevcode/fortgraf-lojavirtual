@@ -138,7 +138,7 @@ function ProdutosPage() {
 
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {list.map((p, i) => (
-              <Reveal key={p.id} delay={Math.min(i, 6) * 0.05}>
+              <Reveal key={p.id} delay={Math.min(i, 6) * 0.05} className="h-full min-w-0">
                 <article className="registration-shift group relative flex h-full min-w-0 flex-col border border-ink-k bg-paper">
                   <CropMarks />
                   <Link
