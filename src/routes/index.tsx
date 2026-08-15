@@ -5,7 +5,6 @@ import {
   Gauge,
   Paperclip,
   Phone,
-  Sparkles,
   Target,
 } from "lucide-react";
 import { motion } from "motion/react";
@@ -15,13 +14,14 @@ import { toast } from "sonner";
 import { Logo } from "@/components/Logo";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { CropMarks, InkBar } from "@/components/PrintMarks";
 import heroPress from "@/assets/hero-press.jpg";
 import saoLuis from "@/assets/sao-luis.jpg";
 import team1 from "@/assets/team-1.jpg";
 import team2 from "@/assets/team-2.jpg";
 import team3 from "@/assets/team-3.jpg";
 import team4 from "@/assets/team-4.jpg";
-import { brl, minPrice, products } from "@/lib/products";
+import { brl, categorySwatch, minPrice, products } from "@/lib/products";
 import { CountUp } from "@/components/CountUp";
 import { Reveal } from "@/components/Reveal";
 
@@ -40,10 +40,25 @@ export const Route = createFileRoute("/")({
         content:
           "Gráfica em São Luís do Maranhão: impressão offset e digital, comunicação visual, fachadas e adesivação. Produção em até 2 dias úteis. (98) 3222-7139.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Home,
 });
+
+/* Estilos compartilhados com /produtos — identidade de prova de impressão. */
+const kicker = "font-mono text-[0.7rem] uppercase tracking-[0.3em] text-ink-k/70";
+const h2Class = "font-display text-3xl uppercase leading-[0.95] text-ink-k sm:text-5xl";
+const btnGhost =
+  "press inline-flex items-center gap-2 border border-ink-k bg-transparent px-5 py-3 font-mono text-[0.65rem] font-bold uppercase tracking-[0.14em] text-ink-k transition-colors hover:border-ink-red hover:bg-ink-red hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink-red";
+const btnSolid =
+  "press inline-flex items-center gap-2 border border-ink-k bg-ink-k px-5 py-3 font-mono text-[0.65rem] font-bold uppercase tracking-[0.14em] text-paper transition-colors hover:bg-ink-red hover:border-ink-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink-red";
+const btnPaper =
+  "press inline-flex items-center gap-2 border border-paper bg-paper px-5 py-3 font-mono text-[0.65rem] font-bold uppercase tracking-[0.14em] text-ink-k transition-colors hover:border-ink-red hover:bg-ink-red hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper";
+const fieldLabel = "font-mono text-[0.65rem] uppercase tracking-[0.2em] text-ink-k/60";
+const fieldInput =
+  "mt-2 w-full border border-ink-k bg-transparent px-4 py-3 text-sm text-ink-k outline-none transition-colors focus:border-ink-red";
 
 const helpCards = [
   { title: "Impressão Digital", text: "Tiragens curtas com qualidade offset e prazo curto." },
@@ -83,9 +98,9 @@ const partners = [
 
 function Home() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-paper">
       <SiteHeader />
-      <main className="flex-1">
+      <main className="flex-1 bg-paper">
         <Hero />
         <CitySection />
         <VisualCommunication />
@@ -102,16 +117,15 @@ function Home() {
 
 function Hero() {
   return (
-    <section className="relative isolate overflow-hidden bg-navy">
+    <section className="relative isolate overflow-hidden bg-ink-k">
       <img
         src={heroPress}
         alt="Operário da FortGraf operando máquina de impressão offset"
         width={1600}
         height={1000}
-        className="absolute inset-0 h-full w-full object-cover opacity-70"
+        className="absolute inset-0 h-full w-full object-cover opacity-45"
       />
-      <div className="diagonal-brand absolute inset-0" />
-      <div className="grid-texture absolute inset-0 opacity-40" />
+      <div className="grid-texture absolute inset-0 opacity-30" />
 
       <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:py-28">
         <motion.div
@@ -119,42 +133,41 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="inline-flex items-center gap-2 border-l-4 border-cmyk-y pl-3 text-xs font-bold uppercase tracking-[0.24em] text-white/85">
+          <p className="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-paper/70">
             Gráfica e Editora · São Luís — MA
           </p>
-          <h1 className="mt-6 text-4xl uppercase leading-[0.95] text-white sm:text-6xl">
+          <h1 className="mt-4 font-display text-4xl uppercase leading-[0.95] text-paper sm:text-6xl">
             Produção em até
-            <span className="block text-cmyk-y">2 dias úteis</span>
+            <span className="block text-ink-y">2 dias úteis</span>
           </h1>
-          <p className="mt-5 font-display text-2xl uppercase text-white sm:text-3xl">
-            GRANDES <span className="font-sans text-xl normal-case italic text-white/80">e pequenos</span>{" "}
-            FORMATOS
+          <p className="mt-5 font-mono text-xs uppercase tracking-[0.24em] text-paper/70">
+            Grandes e pequenos formatos
           </p>
 
-          <div className="mt-9 inline-flex flex-wrap items-center gap-4 border border-white/25 bg-black/25 p-4 backdrop-blur-sm">
-            <span className="grid h-12 w-12 shrink-0 place-items-center bg-cmyk-y">
-              <Phone className="h-5 w-5 text-black" />
+          <div className="mt-9 inline-flex flex-wrap items-center gap-4 border border-paper/40 bg-black/30 p-4 backdrop-blur-sm">
+            <span className="grid h-12 w-12 shrink-0 place-items-center bg-ink-y">
+              <Phone className="h-5 w-5 text-ink-k" />
             </span>
             <div className="min-w-0">
-              <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/70">
+              <p className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-paper/70">
                 Dúvidas e orçamentos
               </p>
-              <a href="tel:+559832227139" className="font-display text-2xl text-white hover:underline">
+              <a
+                href="tel:+559832227139"
+                className="font-display text-2xl text-paper hover:text-ink-y"
+              >
                 (98) 3222-7139
               </a>
             </div>
           </div>
 
           <div className="mt-9 flex flex-wrap gap-3">
-            <Link
-              to="/produtos"
-              className="press inline-flex items-center gap-2 bg-white px-6 py-4 text-sm font-bold uppercase tracking-wide text-navy transition-colors hover:bg-cmyk-y"
-            >
-              Comprar online <ArrowRight className="h-4 w-4" />
+            <Link to="/produtos" className={btnPaper}>
+              Comprar online <ArrowRight className="h-3.5 w-3.5" />
             </Link>
             <a
               href="#orcamento"
-              className="press inline-flex items-center gap-2 border border-white/60 px-6 py-4 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-white/10"
+              className="press inline-flex items-center gap-2 border border-paper/60 px-5 py-3 font-mono text-[0.65rem] font-bold uppercase tracking-[0.14em] text-paper transition-colors hover:border-ink-red hover:bg-ink-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper"
             >
               Fazer orçamento
             </a>
@@ -167,18 +180,21 @@ function Hero() {
           transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="hidden items-center justify-end lg:flex"
         >
-          <div className="bg-white/95 px-10 py-8 shadow-2xl">
+          <div className="relative border border-ink-k bg-paper px-10 py-8">
+            <CropMarks />
             <Logo size="lg" />
+            <InkBar className="absolute inset-x-0 bottom-0 w-full" />
           </div>
         </motion.div>
       </div>
+      <InkBar className="w-full" />
     </section>
   );
 }
 
 function CitySection() {
   return (
-    <section id="servicos" className="relative isolate">
+    <section id="servicos" className="relative isolate border-b border-ink-k/80">
       <img
         src={saoLuis}
         alt="Vista aérea da cidade de São Luís, no Maranhão"
@@ -187,19 +203,21 @@ function CitySection() {
         height={900}
         className="absolute inset-0 h-full w-full object-cover"
       />
-      <div className="absolute inset-0 bg-black/70" />
+      <div className="absolute inset-0 bg-ink-k/80" />
       <Reveal className="relative mx-auto max-w-3xl px-4 py-24 text-center sm:px-6">
-        <h2 className="text-3xl uppercase text-white sm:text-5xl">Gráfica em São Luís é aqui!</h2>
-        <p className="mt-5 text-base leading-relaxed text-white/80">
+        <p className="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-paper/70">
+          Parque gráfico próprio
+        </p>
+        <h2 className="mt-3 font-display text-3xl uppercase leading-[0.95] text-paper sm:text-5xl">
+          Gráfica em São Luís é aqui!
+        </h2>
+        <p className="mt-5 text-sm leading-relaxed text-paper/75">
           Somos reconhecidos na capital maranhense pela experiência de mais de duas décadas e pela
           capacidade de impressão: do pequeno formato ao grande formato, com equipe própria de produção,
           acabamento e instalação.
         </p>
-        <a
-          href="#orcamento"
-          className="press mt-9 inline-flex items-center gap-2 bg-primary px-7 py-4 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-colors hover:bg-primary-dark"
-        >
-          Fale conosco <ArrowRight className="h-4 w-4" />
+        <a href="#orcamento" className={`${btnPaper} mt-9`}>
+          Fale conosco <ArrowRight className="h-3.5 w-3.5" />
         </a>
       </Reveal>
     </section>
@@ -214,16 +232,14 @@ function VisualCommunication() {
   ];
 
   return (
-    <section className="bg-background py-20">
+    <section className="bg-paper py-20">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center">
         <div>
-          <span className="section-kicker">
-            <Sparkles className="h-4 w-4" /> Comunicação visual
-          </span>
-          <h2 className="mt-4 text-3xl uppercase leading-tight sm:text-4xl">
+          <p className={kicker}>Comunicação visual</p>
+          <h2 className="mt-3 font-display text-3xl uppercase leading-[0.95] text-ink-k sm:text-4xl">
             Surpreenda seu público e eleve o valor da sua marca com projetos diferenciados
           </h2>
-          <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+          <p className="mt-5 text-sm leading-relaxed text-ink-k/70">
             Trabalhamos com impressão digital de alta resolução, fachadas em ACM e letras caixa,
             adesivação de vitrines e frotas, painéis, totens e sinalização interna. Cada projeto passa
             por medição no local, prova de cor e instalação feita pela nossa equipe — para que o
@@ -231,23 +247,18 @@ function VisualCommunication() {
           </p>
 
           <dl className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-3">
-            {stats.map((s) => (
-              <div key={s.label} className="border-t-4 border-primary pt-3">
-                <dt className="font-display text-3xl text-foreground">
+            {stats.map((s, i) => (
+              <div key={s.label} className="border-t-4 pt-3" style={{ borderTopColor: [ "var(--ink-c)", "var(--ink-m)", "var(--ink-y)" ][i] }}>
+                <dt className="font-display text-3xl text-ink-k">
                   <CountUp value={s.value} prefix={s.prefix} />
                 </dt>
-                <dd className="mt-1 text-xs font-bold uppercase tracking-wide text-muted-foreground">
-                  {s.label}
-                </dd>
+                <dd className={`mt-1 ${fieldLabel}`}>{s.label}</dd>
               </div>
             ))}
           </dl>
 
-          <a
-            href="#orcamento"
-            className="press mt-10 inline-flex items-center gap-2 bg-foreground px-7 py-4 text-sm font-bold uppercase tracking-wide text-background transition-colors hover:bg-primary"
-          >
-            Fale conosco <ArrowRight className="h-4 w-4" />
+          <a href="#orcamento" className={`${btnSolid} mt-10`}>
+            Fale conosco <ArrowRight className="h-3.5 w-3.5" />
           </a>
         </div>
 
@@ -260,7 +271,7 @@ function VisualCommunication() {
               loading="lazy"
               width={800}
               height={800}
-              className={`h-40 w-full object-cover sm:h-56 ${i % 3 === 0 ? "sm:h-64" : ""}`}
+              className={`h-40 w-full border border-ink-k/60 object-cover sm:h-56 ${i % 3 === 0 ? "sm:h-64" : ""}`}
             />
           ))}
         </div>
@@ -270,23 +281,25 @@ function VisualCommunication() {
 }
 
 function Pillars() {
+  const inks = ["var(--ink-c)", "var(--ink-m)", "var(--ink-y)"];
   return (
-    <section className="border-y border-border bg-muted/50 py-20">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-3">
+    <section className="border-y border-ink-k/80 bg-paper py-20">
+      <div className="mx-auto grid max-w-7xl gap-6 px-4 sm:px-6 lg:grid-cols-3">
         {pillars.map(({ icon: Icon, title, text }, i) => (
-          <Reveal key={title} delay={i * 0.12}>
-            <div className="hover-lift h-full bg-card p-8 text-center shadow-sm">
+          <Reveal key={title} delay={i * 0.12} className="h-full">
+            <div className="registration-shift relative flex h-full flex-col items-center border border-ink-k bg-paper p-8 text-center">
+              <CropMarks />
               <motion.span
                 whileHover={{ rotate: -6, scale: 1.06 }}
                 transition={{ type: "spring", stiffness: 300, damping: 16 }}
-                className={`mx-auto grid h-16 w-16 place-items-center ${
-                  i === 0 ? "bg-cmyk-c" : i === 1 ? "bg-cmyk-m" : "bg-cmyk-y"
-                }`}
+                className="grid h-16 w-16 place-items-center border border-ink-k"
+                style={{ background: inks[i] }}
               >
-                <Icon className={`h-7 w-7 ${i === 2 ? "text-black" : "text-white"}`} />
+                <Icon className={`h-7 w-7 ${i === 2 ? "text-ink-k" : "text-white"}`} />
               </motion.span>
-              <h3 className="mt-6 text-xl uppercase">{title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{text}</p>
+              <h3 className="reg-layer mt-6 font-display text-xl uppercase text-ink-k">{title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-ink-k/70">{text}</p>
+              <InkBar className="absolute inset-x-0 bottom-0 w-full" />
             </div>
           </Reveal>
         ))}
@@ -297,26 +310,44 @@ function Pillars() {
 
 function HelpSection() {
   return (
-    <section className="bg-primary py-20">
+    <section className="bg-ink-k py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <h2 className="text-center text-3xl uppercase text-primary-foreground sm:text-4xl">
+        <p className="text-center font-mono text-[0.7rem] uppercase tracking-[0.3em] text-paper/70">
+          Serviços / especificação
+        </p>
+        <h2 className="mt-3 text-center font-display text-3xl uppercase leading-[0.95] text-paper sm:text-5xl">
           Como podemos te ajudar?
         </h2>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {helpCards.map((c, i) => (
-            <Reveal key={c.title} delay={i * 0.08}>
-            <a
-              href="#orcamento"
-              className="hover-lift press group block h-full bg-white p-6"
-            >
-              <span className="block h-1 w-10 bg-cmyk-m transition-all group-hover:w-20" />
-              <h3 className="mt-5 text-lg uppercase text-navy">{c.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{c.text}</p>
-              <span className="mt-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary">
-                Saiba mais
-                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-              </span>
-            </a>
+            <Reveal key={c.title} delay={i * 0.08} className="h-full min-w-0">
+              <a
+                href="#orcamento"
+                className="registration-shift group relative flex h-full min-w-0 flex-col border border-paper/30 bg-paper p-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink-red"
+              >
+                <CropMarks />
+                <span
+                  className="inline-flex items-center gap-2 font-mono text-[0.65rem] uppercase tracking-[0.24em] text-ink-k/60"
+                >
+                  <span
+                    aria-hidden
+                    className="h-2 w-2"
+                    style={{
+                      background: ["var(--ink-c)", "var(--ink-m)", "var(--ink-y)", "var(--ink-k)"][i],
+                    }}
+                  />
+                  Serviço
+                </span>
+                <h3 className="reg-layer mt-2 font-display text-lg uppercase leading-tight text-ink-k">
+                  {c.title}
+                </h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-k/70">{c.text}</p>
+                <span className="mt-5 inline-flex items-center gap-2 font-mono text-[0.65rem] font-bold uppercase tracking-[0.14em] text-ink-red">
+                  Saiba mais
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                </span>
+                <InkBar className="absolute inset-x-0 bottom-0 w-full" />
+              </a>
             </Reveal>
           ))}
         </div>
@@ -327,47 +358,60 @@ function HelpSection() {
 
 function StoreSection() {
   return (
-    <section id="produtos" className="bg-background py-20">
+    <section id="produtos" className="bg-paper py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
           <div>
-            <span className="section-kicker">Loja online</span>
-            <h2 className="mt-4 text-3xl uppercase sm:text-4xl">Nossos produtos</h2>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            <p className={kicker}>Loja online</p>
+            <h2 className={`mt-3 ${h2Class}`}>Nossos produtos</h2>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-k/70">
               Escolha o produto, defina papel, material ou tamanho, veja o preço na hora e finalize o
               pedido. Tudo online, sem esperar retorno de orçamento.
             </p>
           </div>
-          <Link
-            to="/produtos"
-            className="inline-flex shrink-0 items-center gap-2 bg-primary px-6 py-4 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-colors hover:bg-primary-dark"
-          >
-            Ver a loja completa <ArrowRight className="h-4 w-4" />
+          <Link to="/produtos" className={`${btnSolid} shrink-0`}>
+            Ver a loja completa <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {products.map((p, i) => (
-            <Reveal key={p.id} delay={(i % 4) * 0.07} className="min-w-0">
-            <Link
-              to="/produtos/$id"
-              params={{ id: p.id }}
-              className="hover-lift press group flex gap-4 border border-border bg-card p-4 hover:border-primary"
-            >
-              <img
-                src={p.image}
-                alt={p.name}
-                loading="lazy"
-                width={900}
-                height={700}
-                className="h-20 w-20 shrink-0 object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-              <div className="min-w-0">
-                <h3 className="truncate text-base uppercase group-hover:text-primary">{p.name}</h3>
-                <p className="mt-1 text-xs text-muted-foreground">A partir de</p>
-                <p className="font-display text-lg text-primary">{brl(minPrice(p))}</p>
-              </div>
-            </Link>
+            <Reveal key={p.id} delay={(i % 4) * 0.07} className="h-full min-w-0">
+              <Link
+                to="/produtos/$id"
+                params={{ id: p.id }}
+                className="registration-shift group relative flex h-full min-w-0 flex-col border border-ink-k bg-paper focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink-red"
+              >
+                <CropMarks />
+                <img
+                  src={p.image}
+                  alt={p.name}
+                  loading="lazy"
+                  width={900}
+                  height={700}
+                  className="h-36 w-full border-b border-ink-k/60 object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                />
+                <div className="flex flex-1 flex-col p-4">
+                  <span className="inline-flex items-center gap-2 font-mono text-[0.6rem] uppercase tracking-[0.24em] text-ink-k/60">
+                    <span
+                      aria-hidden
+                      className="h-2 w-2"
+                      style={{ background: categorySwatch[p.category] ?? "var(--ink-k)" }}
+                    />
+                    {p.category}
+                  </span>
+                  <h3 className="reg-layer mt-2 font-display text-base uppercase leading-tight text-ink-k">
+                    {p.name}
+                  </h3>
+                  <p className="mt-3 flex-1 font-mono text-[0.6rem] uppercase tracking-[0.2em] text-ink-k/50">
+                    A partir de
+                  </p>
+                  <p className="mt-1 inline-block self-start rounded-sm bg-ink-red px-2 py-1 font-mono text-sm font-bold text-white">
+                    {brl(minPrice(p))}
+                  </p>
+                </div>
+                <InkBar className="w-full" />
+              </Link>
             </Reveal>
           ))}
         </div>
@@ -378,20 +422,20 @@ function StoreSection() {
 
 function PartnersSection() {
   return (
-    <section id="parceiros" className="border-y border-border bg-muted/40 py-20">
+    <section id="parceiros" className="border-y border-ink-k/80 bg-paper py-20">
       <div className="mx-auto max-w-7xl px-4 text-center sm:px-6">
-        <span className="section-kicker">Confiança</span>
-        <h2 className="mt-4 text-3xl uppercase sm:text-4xl">Nossos parceiros</h2>
-        <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+        <p className={kicker}>Confiança</p>
+        <h2 className={`mt-3 ${h2Class}`}>Nossos parceiros</h2>
+        <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-ink-k/70">
           Empresas, escolas, construtoras e instituições que contam com a FortGraf para materiais
           recorrentes, campanhas e projetos de comunicação visual em todo o Maranhão.
         </p>
 
-        <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden border border-border bg-border sm:grid-cols-4">
+        <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden border border-ink-k bg-ink-k/20 sm:grid-cols-4">
           {partners.map((name) => (
             <div
               key={name}
-              className="grid h-24 place-items-center bg-card px-4 transition-transform hover:scale-[1.03] text-center text-sm font-bold uppercase tracking-wide text-muted-foreground transition-colors hover:text-primary"
+              className="grid h-24 place-items-center bg-paper px-4 text-center font-mono text-[0.7rem] uppercase tracking-[0.14em] text-ink-k/70 transition-colors hover:bg-ink-k hover:text-paper"
             >
               {name}
             </div>
@@ -406,23 +450,21 @@ function QuoteSection() {
   const [fileName, setFileName] = useState("");
 
   return (
-    <section id="orcamento" className="bg-background py-20">
+    <section id="orcamento" className="bg-paper py-20">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
-          <span className="section-kicker">Orçamento personalizado</span>
-          <h2 className="mt-4 text-3xl uppercase leading-tight sm:text-4xl">
-            Faça seu orçamento agora
-          </h2>
-          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+          <p className={kicker}>Orçamento personalizado</p>
+          <h2 className={`mt-3 ${h2Class}`}>Faça seu orçamento agora</h2>
+          <p className="mt-4 text-sm leading-relaxed text-ink-k/70">
             Para grandes volumes, projetos especiais ou artes que precisam de análise técnica, envie os
             detalhes e o arquivo. Nossa equipe responde com prazo e valor fechado.
           </p>
-          <p className="mt-6 inline-block bg-cmyk-y px-4 py-2 font-display text-sm uppercase text-black">
+          <p className="mt-6 inline-block bg-ink-y px-4 py-2 font-mono text-[0.7rem] font-bold uppercase tracking-[0.14em] text-ink-k">
             Ganhe 10% de desconto no seu orçamento
           </p>
-          <p className="mt-6 text-sm text-muted-foreground">
+          <p className="mt-6 text-sm text-ink-k/70">
             Pedidos padronizados?{" "}
-            <Link to="/produtos" className="font-bold text-primary hover:underline">
+            <Link to="/produtos" className="font-bold text-ink-red hover:underline">
               Compre direto na loja online
             </Link>
             .
@@ -438,23 +480,18 @@ function QuoteSection() {
             e.currentTarget.reset();
             setFileName("");
           }}
-          className="border border-border bg-card p-6 shadow-sm sm:p-8"
+          className="relative border border-ink-k bg-paper p-6 sm:p-8"
         >
+          <CropMarks />
           <div className="grid gap-5 sm:grid-cols-2">
             <div>
-              <label htmlFor="q-name" className="text-xs font-bold uppercase tracking-widest">
+              <label htmlFor="q-name" className={fieldLabel}>
                 Nome
               </label>
-              <input
-                id="q-name"
-                name="name"
-                required
-                maxLength={100}
-                className="mt-2 w-full border border-input bg-background px-4 py-3 text-sm outline-none focus:border-primary"
-              />
+              <input id="q-name" name="name" required maxLength={100} className={fieldInput} />
             </div>
             <div>
-              <label htmlFor="q-email" className="text-xs font-bold uppercase tracking-widest">
+              <label htmlFor="q-email" className={fieldLabel}>
                 E-mail
               </label>
               <input
@@ -463,13 +500,13 @@ function QuoteSection() {
                 type="email"
                 required
                 maxLength={255}
-                className="mt-2 w-full border border-input bg-background px-4 py-3 text-sm outline-none focus:border-primary"
+                className={fieldInput}
               />
             </div>
           </div>
 
           <div className="mt-5">
-            <label htmlFor="q-phone" className="text-xs font-bold uppercase tracking-widest">
+            <label htmlFor="q-phone" className={fieldLabel}>
               Telefone / WhatsApp
             </label>
             <input
@@ -479,15 +516,15 @@ function QuoteSection() {
               required
               maxLength={20}
               placeholder="(98) 90000-0000"
-              className="mt-2 w-full border border-input bg-background px-4 py-3 text-sm outline-none focus:border-primary"
+              className={fieldInput}
             />
           </div>
 
           <div className="mt-5">
-            <span className="text-xs font-bold uppercase tracking-widest">Anexo de arquivo</span>
+            <span className={fieldLabel}>Anexo de arquivo</span>
             <label
               htmlFor="q-file"
-              className="mt-2 flex cursor-pointer items-center gap-3 border border-dashed border-input px-4 py-4 text-sm text-muted-foreground hover:border-primary"
+              className="mt-2 flex cursor-pointer items-center gap-3 border border-dashed border-ink-k/60 px-4 py-4 text-sm text-ink-k/60 transition-colors hover:border-ink-red"
             >
               <Paperclip className="h-4 w-4 shrink-0" />
               <span className="min-w-0 truncate">
@@ -504,7 +541,7 @@ function QuoteSection() {
           </div>
 
           <div className="mt-5">
-            <label htmlFor="q-message" className="text-xs font-bold uppercase tracking-widest">
+            <label htmlFor="q-message" className={fieldLabel}>
               Mensagem
             </label>
             <textarea
@@ -512,16 +549,14 @@ function QuoteSection() {
               name="message"
               rows={4}
               maxLength={1000}
-              className="mt-2 w-full border border-input bg-background px-4 py-3 text-sm outline-none focus:border-primary"
+              className={fieldInput}
             />
           </div>
 
-          <button
-            type="submit"
-            className="press mt-7 inline-flex w-full items-center justify-center gap-2 bg-primary px-6 py-4 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-colors hover:bg-primary-dark"
-          >
-            Enviar <ArrowRight className="h-4 w-4" />
+          <button type="submit" className={`${btnGhost} mt-7 w-full justify-center`}>
+            Enviar <ArrowRight className="h-3.5 w-3.5" />
           </button>
+          <InkBar className="absolute inset-x-0 bottom-0 w-full" />
         </form>
       </div>
     </section>
