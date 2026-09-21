@@ -16,7 +16,7 @@ export function CropMarks({ className = "" }: { className?: string }) {
   );
 }
 
-/** Barra de registro CMYK. */
+/** Barra de cores da identidade da Gráfica JD. */
 export function InkBar({ className = "" }: { className?: string }) {
   return (
     <span aria-hidden className={`grid grid-cols-4 ${className}`}>

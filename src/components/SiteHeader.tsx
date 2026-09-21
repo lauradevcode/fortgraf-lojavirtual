@@ -10,7 +10,7 @@ const nav = [
   { label: "Página Inicial", to: "/" as const },
   { label: "Serviços", to: "/" as const, hash: "servicos" },
   { label: "Produtos", to: "/produtos" as const },
-  { label: "Parceiros", to: "/" as const, hash: "parceiros" },
+  { label: "Orçamento", to: "/" as const, hash: "orcamento" },
 ];
 
 export function SiteHeader() {
@@ -20,7 +20,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-ink-k/80 bg-paper/95 backdrop-blur">
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3 sm:px-6">
-        <Link to="/" className="min-w-0" aria-label="FortGraf — página inicial">
+        <Link to="/" className="min-w-0" aria-label="Gráfica JD — página inicial">
           <Logo />
         </Link>
 

@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { MessageCircle, Send, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-const PHONE = "559832227139";
+const PHONE = "5561984164287";
 
 type Msg = { from: "bot" | "user"; text: string };
 
@@ -17,17 +17,17 @@ const steps: Step[] = [
     id: "servico",
     question: "Qual serviço você precisa?",
     options: [
-      "Impressão digital / offset",
+      "Impressão digital",
       "Comunicação visual",
-      "Fachada / letra caixa",
-      "Materiais de campanha",
+      "Fachadas e toldos",
+      "Materiais personalizados",
       "Comprar na loja online",
     ],
   },
   {
     id: "prazo",
     question: "Para quando você precisa?",
-    options: ["Urgente (até 2 dias)", "Nesta semana", "Ainda estou planejando"],
+    options: ["Com urgência", "Nesta semana", "Ainda estou planejando"],
   },
   {
     id: "quantidade",
@@ -39,7 +39,7 @@ const steps: Step[] = [
 export function WhatsAppAssistant() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([
-    { from: "bot", text: "Olá! Sou a assistente virtual da FortGraf. 👋" },
+    { from: "bot", text: "Olá! Sou a assistente virtual da Gráfica JD. 👋" },
     { from: "bot", text: steps[0]!.question },
   ]);
   const [stepIndex, setStepIndex] = useState(0);
@@ -80,7 +80,7 @@ export function WhatsAppAssistant() {
 
   function whatsappUrl(extra?: string) {
     const lines = [
-      "Olá, FortGraf! Vim pelo site.",
+      "Olá, Gráfica JD! Vim pelo site.",
       answers["servico"] ? `Serviço: ${answers["servico"]}` : "",
       answers["prazo"] ? `Prazo: ${answers["prazo"]}` : "",
       answers["quantidade"] ? `Volume: ${answers["quantidade"]}` : "",
@@ -135,7 +135,7 @@ export function WhatsAppAssistant() {
               </span>
               <div className="min-w-0">
                 <p className="truncate text-sm font-bold uppercase tracking-wide text-white">
-                  Atendimento FortGraf
+                  Atendimento Gráfica JD
                 </p>
                 <p className="text-[0.7rem] text-white/70">Assistente virtual · online</p>
               </div>

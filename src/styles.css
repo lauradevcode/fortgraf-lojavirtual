@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * FortGraf design system — azul royal + acentos CMYK, tipografia industrial.
+ * Gráfica JD — azul vibrante com acentos laranja e vermelho.
  */
 
 @theme inline {
@@ -58,31 +58,31 @@
   --card-foreground: oklch(0.16 0.01 265);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.16 0.01 265);
-  --primary: oklch(0.48 0.253 267);
+  --primary: #1ca7ec;
   --primary-foreground: oklch(1 0 0);
-  --primary-dark: oklch(0.35 0.2 267);
+  --primary-dark: #087fbd;
   --secondary: oklch(0.96 0.005 265);
   --secondary-foreground: oklch(0.2 0.01 265);
   --muted: oklch(0.965 0.004 265);
   --muted-foreground: oklch(0.5 0.015 265);
-  --accent: oklch(0.94 0.03 267);
-  --accent-foreground: oklch(0.28 0.15 267);
-  --destructive: oklch(0.58 0.24 27);
+  --accent: #fff0e3;
+  --accent-foreground: #7a3200;
+  --destructive: #e31e24;
   --destructive-foreground: oklch(1 0 0);
   --border: oklch(0.91 0.005 265);
   --input: oklch(0.9 0.006 265);
-  --ring: oklch(0.48 0.253 267);
-  --navy: oklch(0.24 0.105 268);
-  --cmyk-c: oklch(0.72 0.152 231);
-  --cmyk-m: oklch(0.585 0.276 349);
-  --cmyk-y: oklch(0.885 0.181 96);
+  --ring: #1ca7ec;
+  --navy: #064f7d;
+  --cmyk-c: #1ca7ec;
+  --cmyk-m: #e31e24;
+  --cmyk-y: #f5811f;
   --cmyk-k: oklch(0.16 0.01 265);
-  /* Tintas de prova de impressão (valores exatos da direção de arte). */
-  --ink-c: #00aeef;
-  --ink-m: #ec008c;
-  --ink-y: #ffd400;
+  /* Cores da identidade Gráfica JD aplicadas à linguagem de impressão. */
+  --ink-c: #1ca7ec;
+  --ink-m: #e31e24;
+  --ink-y: #f5811f;
   --ink-k: #0b0b0c;
-  --ink-red: #e4032e;
+  --ink-red: #e31e24;
   --paper: #f7f5f0;
 }
 
