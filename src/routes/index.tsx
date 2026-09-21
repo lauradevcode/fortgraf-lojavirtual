@@ -16,29 +16,28 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CropMarks, InkBar } from "@/components/PrintMarks";
 import heroPress from "@/assets/hero-press.jpg";
-import saoLuis from "@/assets/sao-luis.jpg";
+import brazlandia from "@/assets/brazlandia-df.jpg";
 import team1 from "@/assets/team-1.jpg";
 import team2 from "@/assets/team-2.jpg";
 import team3 from "@/assets/team-3.jpg";
 import team4 from "@/assets/team-4.jpg";
 import { brl, categorySwatch, minPrice, products } from "@/lib/products";
-import { CountUp } from "@/components/CountUp";
 import { Reveal } from "@/components/Reveal";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "FortGraf — Gráfica e Editora em São Luís (MA)" },
+      { title: "Gráfica JD — Serviços Gráficos em Brazlândia (DF)" },
       {
         name: "description",
         content:
-          "Gráfica em São Luís do Maranhão: impressão offset e digital, comunicação visual, fachadas e adesivação. Produção em até 2 dias úteis. (98) 3222-7139.",
+          "Impressão digital, comunicação visual, fachadas, toldos e materiais personalizados em Brazlândia, Brasília — DF.",
       },
-      { property: "og:title", content: "FortGraf — Gráfica e Editora em São Luís (MA)" },
+      { property: "og:title", content: "Gráfica JD — Serviços Gráficos em Brazlândia (DF)" },
       {
         property: "og:description",
         content:
-          "Gráfica em São Luís do Maranhão: impressão offset e digital, comunicação visual, fachadas e adesivação. Produção em até 2 dias úteis. (98) 3222-7139.",
+          "Impressão digital, comunicação visual, fachadas, toldos e materiais personalizados em Brazlândia, Brasília — DF.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -61,10 +60,10 @@ const fieldInput =
   "mt-2 w-full border border-ink-k bg-transparent px-4 py-3 text-sm text-ink-k outline-none transition-colors focus:border-ink-red";
 
 const helpCards = [
-  { title: "Impressão Digital", text: "Tiragens curtas com qualidade offset e prazo curto." },
-  { title: "Comunicação Visual", text: "Projetos que colocam sua marca em evidência na rua." },
-  { title: "Fachadas", text: "Letras caixa, ACM, lonas e luminosos sob medida." },
-  { title: "Materiais de Campanha", text: "Panfletos, faixas, bandeiras e adesivos em volume." },
+  { title: "Impressão Digital", text: "Impressões de alta qualidade sob medida." },
+  { title: "Comunicação Visual", text: "Banners, adesivos e sinalização." },
+  { title: "Fachadas e Toldos", text: "Cavaletes, toldos cortina e estruturas para loja." },
+  { title: "Materiais Personalizados", text: "Etiquetas em vinil e materiais sob medida." },
 ];
 
 const pillars = [
@@ -76,24 +75,13 @@ const pillars = [
   {
     icon: Target,
     title: "Metas",
-    text: "Reduzir prazos sem abrir mão da qualidade: parque gráfico próprio, produção em até 2 dias úteis e conferência de cor em todo pedido.",
+    text: "Oferecer atendimento rápido e produção cuidadosa, sem abrir mão da qualidade e da conferência de cada pedido.",
   },
   {
     icon: Gauge,
     title: "Diferencial",
-    text: "Estrutura de indústria com atendimento de gráfica de bairro — mais capacidade de impressão pelo menor custo do Maranhão.",
+    text: "Atendimento próximo, acabamento profissional e soluções sob medida para cada necessidade.",
   },
-];
-
-const partners = [
-  "Construtora Marajó",
-  "Rede Bequimão",
-  "Colégio São José",
-  "Praia Grande Turismo",
-  "Supermix Distribuidora",
-  "Instituto Timbira",
-  "Clínica Litoral",
-  "Amazônia Alimentos",
 ];
 
 function Home() {
@@ -107,7 +95,6 @@ function Home() {
         <Pillars />
         <HelpSection />
         <StoreSection />
-        <PartnersSection />
         <QuoteSection />
       </main>
       <SiteFooter />
@@ -120,7 +107,7 @@ function Hero() {
     <section className="relative isolate overflow-hidden bg-ink-k">
       <img
         src={heroPress}
-        alt="Operário da FortGraf operando máquina de impressão offset"
+        alt="Profissional operando máquina de impressão"
         width={1600}
         height={1000}
         className="absolute inset-0 h-full w-full object-cover opacity-45"
@@ -134,11 +121,11 @@ function Hero() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
           <p className="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-paper/70">
-            Gráfica e Editora · São Luís — MA
+            Serviços Gráficos · Brazlândia — DF
           </p>
           <h1 className="mt-4 font-display text-4xl uppercase leading-[0.95] text-paper sm:text-6xl">
-            Produção em até
-            <span className="block text-ink-y">2 dias úteis</span>
+            Produção rápida
+            <span className="block text-ink-y">e com qualidade</span>
           </h1>
           <p className="mt-5 font-mono text-xs uppercase tracking-[0.24em] text-paper/70">
             Grandes e pequenos formatos
@@ -153,10 +140,12 @@ function Hero() {
                 Dúvidas e orçamentos
               </p>
               <a
-                href="tel:+559832227139"
+                href="https://wa.me/5561984164287"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="font-display text-2xl text-paper hover:text-ink-y"
               >
-                (98) 3222-7139
+                (61) 98416-4287
               </a>
             </div>
           </div>
@@ -166,7 +155,9 @@ function Hero() {
               Comprar online <ArrowRight className="h-3.5 w-3.5" />
             </Link>
             <a
-              href="#orcamento"
+              href="https://wa.me/5561984164287?text=Ol%C3%A1%2C%20Gr%C3%A1fica%20JD!%20Gostaria%20de%20fazer%20um%20or%C3%A7amento."
+              target="_blank"
+              rel="noopener noreferrer"
               className="press inline-flex items-center gap-2 border border-paper/60 px-5 py-3 font-mono text-[0.65rem] font-bold uppercase tracking-[0.14em] text-paper transition-colors hover:border-ink-red hover:bg-ink-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper"
             >
               Fazer orçamento
@@ -196,8 +187,8 @@ function CitySection() {
   return (
     <section id="servicos" className="relative isolate border-b border-ink-k/80">
       <img
-        src={saoLuis}
-        alt="Vista aérea da cidade de São Luís, no Maranhão"
+        src={brazlandia}
+        alt="Vista aérea de Brazlândia, no Distrito Federal"
         loading="lazy"
         width={1600}
         height={900}
@@ -209,14 +200,13 @@ function CitySection() {
           Parque gráfico próprio
         </p>
         <h2 className="mt-3 font-display text-3xl uppercase leading-[0.95] text-paper sm:text-5xl">
-          Gráfica em São Luís é aqui!
+          Serviços gráficos em Brazlândia
         </h2>
         <p className="mt-5 text-sm leading-relaxed text-paper/75">
-          Somos reconhecidos na capital maranhense pela experiência de mais de duas décadas e pela
-          capacidade de impressão: do pequeno formato ao grande formato, com equipe própria de produção,
-          acabamento e instalação.
+          Atendimento rápido e acabamento profissional para impressão digital, comunicação visual,
+          fachadas, toldos e materiais personalizados.
         </p>
-        <a href="#orcamento" className={`${btnPaper} mt-9`}>
+        <a href="https://wa.me/5561984164287" target="_blank" rel="noopener noreferrer" className={`${btnPaper} mt-9`}>
           Fale conosco <ArrowRight className="h-3.5 w-3.5" />
         </a>
       </Reveal>
@@ -226,9 +216,9 @@ function CitySection() {
 
 function VisualCommunication() {
   const stats = [
-    { value: 147, prefix: "+", label: "Clientes satisfeitos" },
-    { value: 271, prefix: "+", label: "Projetos entregues" },
-    { value: 22, prefix: "", label: "Anos de experiência" },
+    { value: "Rápido", label: "Atendimento" },
+    { value: "Preciso", label: "Acabamento" },
+    { value: "Sob medida", label: "Produção" },
   ];
 
   return (
@@ -250,14 +240,14 @@ function VisualCommunication() {
             {stats.map((s, i) => (
               <div key={s.label} className="border-t-4 pt-3" style={{ borderTopColor: [ "var(--ink-c)", "var(--ink-m)", "var(--ink-y)" ][i] }}>
                 <dt className="font-display text-3xl text-ink-k">
-                  <CountUp value={s.value} prefix={s.prefix} />
+                   {s.value}
                 </dt>
                 <dd className={`mt-1 ${fieldLabel}`}>{s.label}</dd>
               </div>
             ))}
           </dl>
 
-          <a href="#orcamento" className={`${btnSolid} mt-10`}>
+          <a href="https://wa.me/5561984164287" target="_blank" rel="noopener noreferrer" className={`${btnSolid} mt-10`}>
             Fale conosco <ArrowRight className="h-3.5 w-3.5" />
           </a>
         </div>
@@ -267,7 +257,7 @@ function VisualCommunication() {
             <img
               key={i}
               src={src}
-              alt="Equipe FortGraf em produção gráfica e comunicação visual"
+              alt="Equipe em produção gráfica e comunicação visual"
               loading="lazy"
               width={800}
               height={800}
@@ -322,7 +312,9 @@ function HelpSection() {
           {helpCards.map((c, i) => (
             <Reveal key={c.title} delay={i * 0.08} className="h-full min-w-0">
               <a
-                href="#orcamento"
+                href="https://wa.me/5561984164287"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="registration-shift group relative flex h-full min-w-0 flex-col border border-paper/30 bg-paper p-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink-red"
               >
                 <CropMarks />
@@ -365,8 +357,8 @@ function StoreSection() {
             <p className={kicker}>Loja online</p>
             <h2 className={`mt-3 ${h2Class}`}>Nossos produtos</h2>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-k/70">
-              Escolha o produto, defina papel, material ou tamanho, veja o preço na hora e finalize o
-              pedido. Tudo online, sem esperar retorno de orçamento.
+               Escolha o produto, defina o material ou tamanho e envie seu pedido. Os valores são
+               confirmados no atendimento antes da produção.
             </p>
           </div>
           <Link to="/produtos" className={`${btnSolid} shrink-0`}>
@@ -413,32 +405,6 @@ function StoreSection() {
                 <InkBar className="w-full" />
               </Link>
             </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function PartnersSection() {
-  return (
-    <section id="parceiros" className="border-y border-ink-k/80 bg-paper py-20">
-      <div className="mx-auto max-w-7xl px-4 text-center sm:px-6">
-        <p className={kicker}>Confiança</p>
-        <h2 className={`mt-3 ${h2Class}`}>Nossos parceiros</h2>
-        <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-ink-k/70">
-          Empresas, escolas, construtoras e instituições que contam com a FortGraf para materiais
-          recorrentes, campanhas e projetos de comunicação visual em todo o Maranhão.
-        </p>
-
-        <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden border border-ink-k bg-ink-k/20 sm:grid-cols-4">
-          {partners.map((name) => (
-            <div
-              key={name}
-              className="grid h-24 place-items-center bg-paper px-4 text-center font-mono text-[0.7rem] uppercase tracking-[0.14em] text-ink-k/70 transition-colors hover:bg-ink-k hover:text-paper"
-            >
-              {name}
-            </div>
           ))}
         </div>
       </div>
@@ -515,7 +481,7 @@ function QuoteSection() {
               type="tel"
               required
               maxLength={20}
-              placeholder="(98) 90000-0000"
+              placeholder="(61) 90000-0000"
               className={fieldInput}
             />
           </div>

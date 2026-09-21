@@ -10,16 +10,16 @@ import { brl, categories, categorySwatch, minPrice, products, salesScore } from 
 export const Route = createFileRoute("/produtos/")({
   head: () => ({
     meta: [
-      { title: "Loja de produtos gráficos | FortGraf São Luís" },
+      { title: "Produtos de comunicação visual | Gráfica JD" },
       {
         name: "description",
         content:
-          "Cartões de visita, banners, envelopes, convites, catálogos, adesivos e carimbos com preço e produção em até 2 dias úteis.",
+          "Lonas, banners, adesivos, etiquetas em vinil, cavaletes e toldos em Brazlândia, Brasília — DF.",
       },
-      { property: "og:title", content: "Loja de produtos gráficos | FortGraf" },
+      { property: "og:title", content: "Produtos de comunicação visual | Gráfica JD" },
       {
         property: "og:description",
-        content: "Peça online cartões, banners, adesivos e carimbos com a FortGraf em São Luís (MA).",
+        content: "Peça online lonas, banners, adesivos e materiais personalizados com a Gráfica JD.",
       },
     ],
   }),
@@ -56,11 +56,10 @@ function ProdutosPage() {
               Ficha técnica / catálogo
             </p>
             <h1 className="mt-3 max-w-3xl font-display text-3xl uppercase leading-[0.95] text-ink-k sm:text-5xl">
-              Produtos gráficos com preço na hora
+              Comunicação visual sob medida
             </h1>
             <p className="mt-4 max-w-xl text-sm leading-relaxed text-ink-k/70">
-              Escolha papel, material ou tamanho, defina a quantidade e o preço é recalculado.
-              Produção em até 2 dias úteis.
+               Escolha o material ou tamanho, defina a quantidade e envie o pedido para confirmação.
             </p>
           </div>
           <InkBar className="w-full" />
@@ -100,7 +99,7 @@ function ProdutosPage() {
               <input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
-                placeholder="cartão, banner..."
+                placeholder="lona, banner, adesivo..."
                 className="w-full bg-transparent font-mono text-xs text-ink-k outline-none placeholder:text-ink-k/40"
               />
             </label>
