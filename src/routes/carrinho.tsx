@@ -9,16 +9,16 @@ import { brl } from "@/lib/products";
 export const Route = createFileRoute("/carrinho")({
   head: () => ({
     meta: [
-      { title: "Carrinho de pedidos | FortGraf Gráfica São Luís" },
+      { title: "Carrinho de pedidos | Gráfica JD" },
       {
         name: "description",
         content:
-          "Revise os itens do seu pedido gráfico, ajuste quantidades e finalize com a FortGraf em São Luís (MA).",
+          "Revise os itens do seu pedido gráfico, ajuste quantidades e finalize com a Gráfica JD.",
       },
-      { property: "og:title", content: "Carrinho de pedidos | FortGraf" },
+      { property: "og:title", content: "Carrinho de pedidos | Gráfica JD" },
       {
         property: "og:description",
-        content: "Revise seu pedido de impressão e finalize com a FortGraf.",
+        content: "Revise seu pedido de impressão e finalize com a Gráfica JD.",
       },
     ],
   }),

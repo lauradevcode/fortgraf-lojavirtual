@@ -17,15 +17,15 @@ export const Route = createFileRoute("/produtos/$id")({
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "Produto indisponível | FortGraf" }, { name: "robots", content: "noindex" }],
+        meta: [{ title: "Produto indisponível | Gráfica JD" }, { name: "robots", content: "noindex" }],
       };
     }
     const { product } = loaderData;
     return {
       meta: [
-        { title: `${product.name} — preço e opções | FortGraf` },
+        { title: `${product.name} — opções | Gráfica JD` },
         { name: "description", content: product.short },
-        { property: "og:title", content: `${product.name} | FortGraf Gráfica` },
+        { property: "og:title", content: `${product.name} | Gráfica JD` },
         { property: "og:description", content: product.short },
       ],
     };
@@ -84,7 +84,7 @@ function ProdutoPage() {
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               <div className="flex items-center gap-3 border border-border p-4 text-sm">
                 <Clock className="h-5 w-5 shrink-0 text-cmyk-c" />
-                <span>Produção em até 2 dias úteis</span>
+                 <span>Prazo confirmado no atendimento</span>
               </div>
               <div className="flex items-center gap-3 border border-border p-4 text-sm">
                 <ShieldCheck className="h-5 w-5 shrink-0 text-cmyk-m" />

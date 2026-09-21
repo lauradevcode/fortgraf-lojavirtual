@@ -11,16 +11,16 @@ import { brl } from "@/lib/products";
 export const Route = createFileRoute("/checkout")({
   head: () => ({
     meta: [
-      { title: "Finalizar pedido | FortGraf Gráfica São Luís" },
+      { title: "Finalizar pedido | Gráfica JD" },
       {
         name: "description",
         content:
-          "Informe seus dados de contato e confirme seu pedido gráfico. A FortGraf responde por WhatsApp ou e-mail.",
+          "Informe seus dados de contato e confirme seu pedido gráfico. A Gráfica JD responde por WhatsApp ou e-mail.",
       },
-      { property: "og:title", content: "Finalizar pedido | FortGraf" },
+      { property: "og:title", content: "Finalizar pedido | Gráfica JD" },
       {
         property: "og:description",
-        content: "Confirme seu pedido de impressão com a FortGraf em São Luís (MA).",
+        content: "Confirme seu pedido de impressão com a Gráfica JD em Brazlândia, Brasília — DF.",
       },
     ],
   }),
@@ -142,7 +142,7 @@ function CheckoutPage() {
                   label="Telefone / WhatsApp"
                   name="phone"
                   type="tel"
-                  placeholder="(98) 90000-0000"
+                  placeholder="(61) 90000-0000"
                   error={errors["phone"]}
                   required
                 />
