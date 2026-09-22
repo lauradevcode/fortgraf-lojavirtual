@@ -22,6 +22,8 @@ export const Route = createFileRoute("/checkout")({
         property: "og:description",
         content: "Confirme seu pedido de impressão com a Gráfica JD em Brazlândia, Brasília — DF.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: CheckoutPage,

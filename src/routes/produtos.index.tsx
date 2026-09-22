@@ -21,6 +21,8 @@ export const Route = createFileRoute("/produtos/")({
         property: "og:description",
         content: "Peça online lonas, banners, adesivos e materiais personalizados com a Gráfica JD.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: ProdutosPage,

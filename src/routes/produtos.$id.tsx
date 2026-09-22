@@ -17,7 +17,12 @@ export const Route = createFileRoute("/produtos/$id")({
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "Produto indisponível | Gráfica JD" }, { name: "robots", content: "noindex" }],
+        meta: [
+          { title: "Produto indisponível | Gráfica JD" },
+          { name: "robots", content: "noindex" },
+          { property: "og:type", content: "website" },
+          { name: "twitter:card", content: "summary_large_image" },
+        ],
       };
     }
     const { product } = loaderData;
@@ -27,6 +32,8 @@ export const Route = createFileRoute("/produtos/$id")({
         { name: "description", content: product.short },
         { property: "og:title", content: `${product.name} | Gráfica JD` },
         { property: "og:description", content: product.short },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
       ],
     };
   },
@@ -37,10 +44,12 @@ function ProdutoPage() {
   const { product } = Route.useLoaderData() as { product: Product };
   const { addItem } = useCart();
   const navigate = useNavigate();
-  const [variantId, setVariantId] = useState(product.variants[0]!.id);
+  const firstVariant = product.variants[0];
+  if (!firstVariant) throw new Error("Produto sem opções disponíveis");
+  const [variantId, setVariantId] = useState(firstVariant.id);
   const [qty, setQty] = useState(product.minQty);
 
-  const variant = product.variants.find((v) => v.id === variantId) ?? product.variants[0]!;
+  const variant = product.variants.find((v) => v.id === variantId) ?? firstVariant;
   const totalQty = Math.max(product.minQty, qty || product.minQty);
   const total = variant.price * totalQty;
 

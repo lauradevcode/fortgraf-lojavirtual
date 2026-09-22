@@ -20,6 +20,8 @@ export const Route = createFileRoute("/carrinho")({
         property: "og:description",
         content: "Revise seu pedido de impressão e finalize com a Gráfica JD.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: CarrinhoPage,
